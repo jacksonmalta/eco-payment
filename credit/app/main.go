@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	Payment                 = "payment"
+	Payment                 = "Payment"
 	UnauthorizedTransaction = "unauthorized-transaction"
 	UnauthorizedSettlement  = "unauthorized-settlement"
 	AuthorizerNotFound      = "authorizer-not-found"
