@@ -19,7 +19,7 @@ make run/docker
 Criando uma conta:
 
 ```shell
-curl --location --request POST 'localhost:5002/v1/accounts' \
+curl -i --location --request POST 'localhost:5002/v1/accounts' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "document_number": "05662459061",
@@ -36,7 +36,7 @@ external_key: é a chave da sua conta e deverá ser único
 Consultando uma conta:
 
 ```shell
-curl --location --request GET 'localhost:5002/v1/accounts/1'
+curl -i --location --request GET 'localhost:5002/v1/accounts/1'
 ```
 
 external_key: chave única da sua conta
@@ -46,7 +46,7 @@ external_key: chave única da sua conta
 Adicionando saldo:
 
 ````shell
-curl --location --request POST 'localhost:5004/v1/transactions' \
+curl -i --location --request POST 'localhost:5004/v1/transactions' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "account_key": "1",
@@ -66,7 +66,7 @@ amount: é o valor em centavos que deseja adicionar ao saldo
 Compra à vista ou compra parcelada ou saque:
 
 ```shell
-curl --location --request POST 'localhost:5005/v1/transactions' \
+curl -i --location --request POST 'localhost:5005/v1/transactions' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "account_key": "1",
