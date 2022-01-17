@@ -71,7 +71,7 @@ curl -i --location --request POST 'localhost:5005/v1/transactions' \
 --data-raw '{
 "account_key": "1",
 "external_key": "4",
-"operation_type": "withdraw",
+"operation_type": "Withdraw",
 "amount": 1000
 }'
 ```
