@@ -1,0 +1,87 @@
+version: "3.9"
+
+services:
+  accreditaion:
+    build:
+      context: accreditation
+      dockerfile: app.Dockerfile
+    container_name: accreditation-api
+    environment:
+      AWS_ACCESS_KEY_ID: foo
+      AWS_SECRET_ACCESS_KEY: bar
+      TABLE_NAME: account
+    networks:
+      - eco-payment
+    expose:
+      - 5002
+    ports:
+      - "5002:5002"
+
+  balance:
+    build:
+      context: balance
+      dockerfile: app.Dockerfile
+    container_name: balance-api
+    environment:
+      AWS_ACCESS_KEY_ID: foo
+      AWS_SECRET_ACCESS_KEY: bar
+      TABLE_NAME: balance
+    networks:
+      - eco-payment
+    expose:
+      - 5003
+    ports:
+      - "5003:5003"
+
+  credit:
+    build:
+      context: credit
+      dockerfile: app.Dockerfile
+    container_name: credit-api
+    environment:
+      AWS_ACCESS_KEY_ID: foo
+      AWS_SECRET_ACCESS_KEY: bar
+      URL_ACCREDITATION: http://accreditation-api:5002/v1/accounts/
+      URL_BALANCE: http://balance-api:5003/v1/balance
+    networks:
+      - eco-payment
+    expose:
+      - 5004
+    ports:
+      - "5004:5004"
+
+  debit:
+    build:
+      context: debit
+      dockerfile: app.Dockerfile
+    container_name: debit-api
+    environment:
+      AWS_ACCESS_KEY_ID: foo
+      AWS_SECRET_ACCESS_KEY: bar
+      URL_ACCREDITATION: http://accreditation-api:5002/v1/accounts/
+      URL_BALANCE: http://balance-api:5003/v1/balance
+    networks:
+      - eco-payment
+    expose:
+      - 5005
+    ports:
+      - "5005:5005"
+
+  localstack:
+    image: localstack/localstack
+    networks:
+      - eco-payment
+    ports:
+      - "4566-4599:4566-4599"
+    environment:
+      - SERVICES=dynamodb
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOST_TMP_FOLDER=${TMPDIR}
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./localstack/scripts/init:/docker-entrypoint-initaws.d
+
+networks:
+  eco-payment:
+    driver: bridge
