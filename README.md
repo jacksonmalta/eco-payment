@@ -80,7 +80,8 @@ account_key: é a chave da conta
 
 external_key: é a chave da transação e deverá ser única por conta.
 
-operation_type: é o tipo de operação como compra à vista ou compra parcelada ou saque (abaixo está a tabela com os valores possíveis)
+operation_type: é o tipo de operação como compra à vista ou compra parcelada ou saque (abaixo está a tabela com os
+valores possíveis)
 
 amount: é o valor em centavos da operação.
 
