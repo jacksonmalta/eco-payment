@@ -6,7 +6,7 @@ Adicione saldo, faça saques ou compras à vista ou parcelado
 
 Inicinando o ecosistema de pagamento:
 
-Será necessário Docker, Docker compose e Make
+Será necessário Docker (20.10.7), Docker compose (1.25.0) e Make (4.2.1)
 
 Na raiz do repositório executar o comando
 
